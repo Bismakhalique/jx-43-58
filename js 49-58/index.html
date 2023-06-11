@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Form</title>
+  <script src="./app.js">
+    </script>
+    <link rel="stylesheet" href="./sheet.css">
+</head>
+
+<H3>CHAPTER 49 to 52</H3>
+<H5>QUESTION 1</H5>
+<body>
+<div class="two">
+ 
+   <script>
+     function displayFormData(event) {
+       event.preventDefault(); // Prevent form submission
+       
+       var name = document.getElementById('name').value;
+       var email = document.getElementById('email').value;
+       var password = document.getElementById('password').value;
+       
+       var formData = {
+         Name: name,
+         Email: email,
+         Password: password
+       };
+       
+       var formOutput = document.getElementById('formOutput');
+       formOutput.innerHTML = JSON.stringify(formData, null, 2);
+     }
+   </script>
+ </head>
+ <body>
+    <div class="one"> <h2>Signup Form</h2></div>
+ 
+   <form onsubmit="displayFormData(event)">
+     <label for="name">Name:</label>
+     <input type="text" id="name" required><br><br>
+     
+     <label for="email">Email:</label>
+     <input type="email" id="email" required><br><br>
+     
+     <label for="password">Password:</label>
+     <input type="password" id="password" required><br><br>
+     
+     <input type="submit" value="Submit">
+   </form>
+   
+   <h2>Form Data:</h2>
+   <pre id="formOutput"></pre>
+ 
+</div>
+</body>
+
+<h5>QUESTION 2</h5>
+
+  <style>
+    .item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .item .details {
+      display: none;
+    }
+  </style>
+  <script>
+    function toggleDetails(buttonId, detailsId) {
+      var button = document.getElementById(buttonId);
+      var details = document.getElementById(detailsId);
+      
+      if (details.style.display === 'none') {
+        details.style.display = 'block';
+        button.innerHTML = 'Read less';
+      } else {
+        details.style.display = 'none';
+        button.innerHTML = 'Read more';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>Item Details</h2>
+  
+  <div class="item">
+    <h3>Item 1</h3>
+    <p>This is a brief description of burger.</p>
+    <p id="item1Details" class="details">hey this is my own recipe burger please try it .</p>
+    <button onclick="toggleDetails('item1Button', 'item1Details')">Read more</button>
+  </div>
+  
+  <div class="item">
+    <h3>Item 2</h3>
+    <p>This is a brief description of pizza.</p>
+    <p id="item2Details" class="details">This is my 2nd item i spend a lot of my time in that so pleASE TRY IT.</p>
+    <button onclick="toggleDetails('item2Button', 'item2Details')">Read more</button>
+  </div>
+  
+  <div class="item">
+    <h3>Item 3</h3>
+    <p>This is a brief description of CHEESY PASTA.</p>
+    <p id="item3Details" class="details">cheese is all time fav of almost al l so try it.</p>
+    <button onclick="toggleDetails('item3Button', 'item3Details')">Read more</button>
+  </div>
+
+<H5>QUESTION 3</H5>
+     
+       <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+    
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+    
+        .hidden-form {
+          display: none;
+          margin-top: 20px;
+        }
+    
+        .hidden-form label {
+          display: block;
+          margin-top: 10px;
+        }
+    
+        .hidden-form input[type="text"] {
+          width: 200px;
+          padding: 5px;
+        }
+    
+        .hidden-form button {
+          margin-top: 10px;
+          padding: 5px 10px;
+        }
+      </style>
+      <script>
+        function addStudent() {
+          var table = document.getElementById("student-table");
+          var firstName = document.getElementById("first-name").value;
+          var lastName = document.getElementById("last-name").value;
+          var age = document.getElementById("age").value;
+    
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          
+          cell1.innerHTML = firstName;
+          cell2.innerHTML = lastName;
+          cell3.innerHTML = age;
+          cell4.innerHTML = '<button onclick="editStudent(this)">Edit</button> <button onclick="deleteStudent(this)">Delete</button>';
+          
+          // Reset form values
+          document.getElementById("first-name").value = "";
+          document.getElementById("last-name").value = "";
+          document.getElementById("age").value = "";
+        }
+    
+        function deleteStudent(button) {
+          var row = button.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+        }
+    
+        function editStudent(button) {
+          var row = button.parentNode.parentNode;
+          var firstName = row.cells[0].innerHTML;
+          var lastName = row.cells[1].innerHTML;
+          var age = row.cells[2].innerHTML;
+    
+          var hiddenForm = document.getElementById("hidden-form");
+          hiddenForm.style.display = "block";
+    
+          hiddenForm.elements["edit-first-name"].value = firstName;
+          hiddenForm.elements["edit-last-name"].value = lastName;
+          hiddenForm.elements["edit-age"].value = age;
+    
+          hiddenForm.onsubmit = function(event) {
+            event.preventDefault();
+            row.cells[0].innerHTML = hiddenForm.elements["edit-first-name"].value;
+            row.cells[1].innerHTML = hiddenForm.elements["edit-last-name"].value;
+            row.cells[2].innerHTML = hiddenForm.elements["edit-age"].value;
+    
+            hiddenForm.style.display = "none";
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <h1>Student Details</h1>
+      <form id="student-form" onsubmit="event.preventDefault(); addStudent();">
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" required>
+    
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" required>
+    
+        <label for="age">Age:</label>
+        <input type="text" id="age" required>
+    
+        <button type="submit">Add Student</button>
+      </form>
+    
+      <table id="student-table">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </table>
+    
+      <form id="hidden-form" class="hidden-form">
+        <label for="edit-first-name">First Name:</label>
+        <input type="text" id="edit-first-name">
+    
+        <label for="edit-last-name">Last Name:</label>
+        <input type="text" id="edit-last-name">
+    
+        <label for="edit-age">Age:</label>
+        <input type="text" id="edit-age">
+    
+        <button type="submit">Save</button>
+      </form>
+
+
+<H2>CHAPTER 53-58</H2>
+<H5>QUESTION 1</H5>
+
+<style>
+    .modal {
+        display: inline;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        display: block;
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .modal-close {
+        display: none;
+    }
+
+</style>
+</head>
+<body>
+<div id="modal" class="modal modal-close">
+    <img id="modalImage" class="modal-content" alt="Modal Image">
+</div>
+
+<div id="imageContainer">
+    <!-- Add your image paths here -->
+    <img src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWVzdGhldGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=700&q=60" style="height: 360px;">
+    <img src="https://img.freepik.com/free-vector/aesthetic-dreamy-background-purple-cloudy-sky-vector-glitter-design_53876-156334.jpg" style="height: 360px;">
+    <img src="https://images.unsplash.com/photo-1517315003714-a071486bd9ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFlc3RoZXRpY3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" style="height: 360px;">
+</div>
+
+<script>
+    var modal = document.getElementById('modal');
+    var modalImage = document.getElementById('modalImage');
+
+    function onImageClick(imagePath) {
+        modal.classList.add('modal-open');
+        modal.classList.remove('modal-close');
+        modal.style.display = 'block';
+        modalImage.src = imagePath;
+    }
+
+    function onClosedImageModal() {
+        modal.classList.add('modal-close');
+        modal.classList.remove('modal-open');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 550);
+    }
+
+    var imageContainer = document.getElementById('imageContainer');
+    var images = imageContainer.getElementsByTagName('img');
+
+    for (var i = 0; i < images.length; i++) {
+        images[i].onclick = function () {
+            onImageClick(this.src);
+        };
+    }
+
+    modal.onclick = onClosedImageModal;
+</script>
+</body>
+
+<H5>QUESTION 2</H5>
+
+<style>
+    #zoom-paragraph {
+      font-size: 16px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var fontSize = 16;
+
+      $("#zoom-in").click(function() {
+        fontSize += 10;
+        $("#zoom-paragraph").css("font-size", fontSize + "px");
+      });
+
+      $("#zoom-out").click(function() {
+        fontSize -= 10;
+        $("#zoom-paragraph").css("font-size", fontSize + "px");
+      });
+    });
+  </script>
+</head>
+<body>
+  <p id="zoom-paragraph">Its Me Dr.Bisma Khalique.</p>
+  <button id="zoom-in">Zoom In (+)</button>
+  <button id="zoom-out">Zoom Out (-)</button>
+</body>
+
+
+</html>
